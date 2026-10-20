@@ -1,0 +1,72 @@
+{% extends "_layouts/citizen.njk" %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-message/macro.njk" import govukErrorMessage %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: back, href: backHref }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if errors | length %}
+        {{ govukErrorSummary({ titleText: errorSummaryTitle, errorList: errors | govukErrorSummary }) }}
+      {% endif %}
+
+      <form method="post" novalidate>
+        {% include "_partials/csrf-input.njk" %}
+        <span class="govuk-caption-l">{{ caption }}</span>
+
+        {# "At least one of three" belongs to the question, not to any one input, so the
+           message sits on the fieldset — which carries the error summary's anchor id. #}
+        {% call govukFieldset({
+          legend: { text: contactDetailsLabel, isPageHeading: true, classes: "govuk-fieldset__legend--l" },
+          attributes: { id: "contactDetails" },
+          describedBy: "contactDetails-hint"
+        }) %}
+          <p class="govuk-hint" id="contactDetails-hint">{{ contactDetailsHint }}</p>
+
+          {% if errors.contactDetails %}
+            {{ govukErrorMessage({ text: errors.contactDetails }) }}
+          {% endif %}
+
+          {{ govukInput({
+            id: "phoneNumber",
+            name: "phoneNumber",
+            value: values.phoneNumber,
+            type: "tel",
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "tel",
+            label: { text: phoneNumberLabel },
+            errorMessage: { text: errors.phoneNumber } if errors.phoneNumber
+          }) }}
+          {{ govukInput({
+            id: "mobileNumber",
+            name: "mobileNumber",
+            value: values.mobileNumber,
+            type: "tel",
+            classes: "govuk-!-width-two-thirds",
+            autocomplete: "tel",
+            label: { text: mobileNumberLabel },
+            errorMessage: { text: errors.mobileNumber } if errors.mobileNumber
+          }) }}
+          {{ govukInput({
+            id: "emailAddress",
+            name: "emailAddress",
+            value: values.emailAddress,
+            type: "email",
+            autocomplete: "email",
+            label: { text: emailAddressLabel },
+            errorMessage: { text: errors.emailAddress } if errors.emailAddress
+          }) }}
+        {% endcall %}
+
+        {{ govukButton({ text: continueText or save }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

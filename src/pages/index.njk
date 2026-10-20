@@ -1,0 +1,57 @@
+{% extends "_layouts/citizen.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">{{ heading }}</h1>
+
+      <p class="govuk-body-l">{{ useThisService }}</p>
+
+      {{ govukButton({
+        text: startButton,
+        href: "/appeal/where-do-you-live",
+        isStartButton: true
+      }) }}
+
+      <h2 class="govuk-heading-m">{{ whatYouCanAppealHeading }}</h2>
+      <p class="govuk-body">{{ whatYouCanAppealIntro }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        {% for item in whatYouCanAppeal %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+
+      <h2 class="govuk-heading-m">{{ schemesHeading }}</h2>
+      <p class="govuk-body">{{ schemes }}</p>
+
+      <h2 class="govuk-heading-m">{{ whereYouLiveHeading }}</h2>
+      <p class="govuk-body">{{ whereYouLive }}</p>
+
+      <h2 class="govuk-heading-m">{{ deadlineHeading }}</h2>
+      {{ govukInsetText({ text: deadline }) }}
+      <p class="govuk-body">{{ deadlineLate }}</p>
+      {{ govukWarningText({ text: deadlineBar, iconFallbackText: "Warning" }) }}
+
+      <h2 class="govuk-heading-m">{{ reconsiderationHeading }}</h2>
+      <p class="govuk-body">{{ reconsideration }}</p>
+
+      <h2 class="govuk-heading-m">{{ beforeYouStartHeading }}</h2>
+      <p class="govuk-body">{{ youWillNeedIntro }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        {% for item in youWillNeed %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+      <p class="govuk-body">{{ documents }}</p>
+      <p class="govuk-body">{{ uksf }}</p>
+      <p class="govuk-body">{{ saveProgress }}</p>
+
+      <h2 class="govuk-heading-m">{{ helpHeading }}</h2>
+      <p class="govuk-body">{{ help }}</p>
+      <p class="govuk-body">
+        Email <a class="govuk-link" href="mailto:{{ contactEmail }}">{{ contactEmail }}</a><br>
+        Telephone {{ contactPhone }}<br>
+        Monday to Friday, 9am to 5pm
+      </p>
+    </div>
+  </div>
+{% endblock %}
