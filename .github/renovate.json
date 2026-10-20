@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["local>hmcts/.github:renovate-config", "local>hmcts/.github//renovate/automerge-all"],
+  "packageRules": [
+    {
+      "description": "The @hmcts-cft/* starter packages move together; a split update leaves the app half on one API.",
+      "matchPackageNames": ["@hmcts-cft/**"],
+      "groupName": "hmcts-cft starter"
+    },
+    {
+      "description": "Playwright's runner and its browser build have to be on the same version.",
+      "matchPackageNames": ["@playwright/test", "playwright-core"],
+      "groupName": "playwright"
+    }
+  ]
+}

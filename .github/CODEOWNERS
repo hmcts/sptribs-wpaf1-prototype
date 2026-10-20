@@ -1,0 +1,11 @@
+# Every change is reviewed by the Special Tribunals team.
+*   @hmcts/special-tribunals
+
+# Except the files Renovate owns. `renovate.json` extends the `automerge-all` preset, and
+# Renovate cannot satisfy a code-owner review — so a blanket rule above leaves its pull
+# requests sitting open forever while looking like ordinary review backlog.
+/package.json
+/yarn.lock
+/.yarn/
+/charts/sptribs-wpaf1-prototype/Chart.yaml
+/.github/workflows/
