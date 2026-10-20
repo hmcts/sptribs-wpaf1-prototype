@@ -1,0 +1,52 @@
+{% extends "_layouts/citizen.njk" %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: back, href: backHref }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if errors | length %}
+        {{ govukErrorSummary({ titleText: errorSummaryTitle, errorList: errors | govukErrorSummary }) }}
+      {% endif %}
+
+      <span class="govuk-caption-l">{{ caption }}</span>
+      <h1 class="govuk-heading-l">{{ heading }}</h1>
+      <p class="govuk-body-l">{{ lede }}</p>
+
+      {{ govukWarningText({ text: warning, iconFallbackText: "Warning" }) }}
+
+      {% for paragraph in whatHappens %}
+        <p class="govuk-body">{{ paragraph }}</p>
+      {% endfor %}
+
+      <p class="govuk-body">
+        {{ checkDate }}
+        <a class="govuk-link" href="{{ backHref }}">{{ changeDate }}</a>.
+      </p>
+
+      <form method="post" novalidate>
+        {% include "_partials/csrf-input.njk" %}
+
+        {{ govukCharacterCount({
+          id: "lateAppealExplanation",
+          name: "lateAppealExplanation",
+          value: values.lateAppealExplanation,
+          maxlength: 5000,
+          rows: 10,
+          label: { text: lateAppealExplanationLabel, classes: "govuk-label--s" },
+          hint: { text: lateAppealExplanationHint },
+          errorMessage: { text: errors.lateAppealExplanation } if errors.lateAppealExplanation
+        }) }}
+
+        {{ govukButton({ text: continueText or save }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

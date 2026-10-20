@@ -1,0 +1,41 @@
+{% extends "_layouts/citizen.njk" %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: back, href: backHref }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if errors | length %}
+        {{ govukErrorSummary({ titleText: errorSummaryTitle, errorList: errors | govukErrorSummary }) }}
+      {% endif %}
+
+      <form method="post" novalidate>
+        {% include "_partials/csrf-input.njk" %}
+        <span class="govuk-caption-l">{{ caption }}</span>
+
+        {{ govukRadios({
+          name: "askedForReconsideration",
+          idPrefix: "askedForReconsideration",
+          fieldset: { legend: { text: askedForReconsiderationLabel, isPageHeading: true, classes: "govuk-fieldset__legend--l" } },
+          hint: { text: askedForReconsiderationHint },
+          items: [
+            { value: "Yes", text: "Yes", checked: values.askedForReconsideration == "Yes" },
+            { value: "No", text: "No", checked: values.askedForReconsideration == "No" }
+          ],
+          errorMessage: { text: errors.askedForReconsideration } if errors.askedForReconsideration
+        }) }}
+
+        {{ govukInsetText({ text: referralNote }) }}
+
+        {{ govukButton({ text: continueText or save }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

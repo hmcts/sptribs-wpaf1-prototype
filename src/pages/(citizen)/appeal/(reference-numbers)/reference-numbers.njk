@@ -1,0 +1,52 @@
+{% extends "_layouts/citizen.njk" %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: back, href: backHref }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if errors | length %}
+        {{ govukErrorSummary({ titleText: errorSummaryTitle, errorList: errors | govukErrorSummary }) }}
+      {% endif %}
+
+      <form method="post" novalidate>
+        {% include "_partials/csrf-input.njk" %}
+        <span class="govuk-caption-l">{{ caption }}</span>
+        <h1 class="govuk-heading-l">{{ heading }}</h1>
+        <p class="govuk-body">{{ lede }}</p>
+
+        {{ govukInput({
+          id: "nationalInsuranceNumber",
+          name: "nationalInsuranceNumber",
+          value: values.nationalInsuranceNumber,
+          type: "text",
+          classes: "govuk-input--width-10",
+          spellcheck: false,
+          label: { text: nationalInsuranceNumberLabel, classes: "govuk-label--s" },
+          hint: { text: nationalInsuranceNumberHint },
+          errorMessage: { text: errors.nationalInsuranceNumber } if errors.nationalInsuranceNumber
+        }) }}
+
+        {{ govukInput({
+          id: "afcsMemberNumber",
+          name: "afcsMemberNumber",
+          value: values.afcsMemberNumber,
+          type: "text",
+          classes: "govuk-input--width-20",
+          spellcheck: false,
+          label: { text: afcsMemberNumberLabel, classes: "govuk-label--s" },
+          hint: { text: afcsMemberNumberHint },
+          errorMessage: { text: errors.afcsMemberNumber } if errors.afcsMemberNumber
+        }) }}
+
+        {{ govukButton({ text: continueText or save }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

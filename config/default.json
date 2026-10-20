@@ -1,0 +1,39 @@
+{
+  "service": {
+    "name": "Appeal a War Pension or Armed Forces Compensation Scheme decision",
+    "contactEmail": "armedforces.chamber@justice.gov.uk",
+    "contactPhone": "0330 303 5857"
+  },
+  "server": {
+    "port": 3212
+  },
+  "session": {
+    "secret": "sptribs-wpaf1-prototype-local-session-secret"
+  },
+  "redis": {
+    "url": "redis://localhost:6379"
+  },
+  "applicationInsights": {
+    "serviceName": "sptribs-wpaf1-prototype",
+    "connectionString": "InstrumentationKey=your-instrumentation-key;IngestionEndpoint=https://dc.services.visualstudio.com/",
+    "enabled": false
+  },
+  "idam": {
+    "issuer": "http://localhost:5062/o",
+    "clientId": "sptribs-frontend",
+    "clientSecret": "sptribs-frontend-idam-secret",
+    "redirectUri": "http://localhost:3212/oauth2-callback",
+    "scope": "openid profile roles"
+  },
+  "ccd": {
+    "caseTypeId": "StWpaf1",
+    "jurisdictionId": "ST_CIC",
+    "dataStoreUrl": "http://localhost:4452",
+    "createEvent": "create-case"
+  },
+  "s2s": {
+    "url": "http://localhost:8489",
+    "microservice": "sptribs_case_api",
+    "secret": "AAAAAAAAAAAAAAAA"
+  }
+}
