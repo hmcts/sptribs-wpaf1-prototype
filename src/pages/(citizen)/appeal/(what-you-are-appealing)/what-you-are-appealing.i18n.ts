@@ -32,7 +32,7 @@ export const en = {
       text: "Changes to the amount or duration of an award"
     },
     {
-      value: "label",
+      value: "awardLabel",
       text: "The label — the medical name given for a claimed condition"
     },
     {

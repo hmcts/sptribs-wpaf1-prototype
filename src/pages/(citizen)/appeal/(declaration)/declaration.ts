@@ -29,8 +29,38 @@ const BACK = "/appeal/check-answers";
 const NEXT = "/appeal/confirmation";
 const MAX_NAME = 100;
 
+/**
+ * Shown when CCD refuses the appeal. Inline rather than in `declaration.i18n.ts` because the
+ * template is shared under `_errors/` and the page content modules are spread flat onto the
+ * view model, so the declaration's own strings would reach this page too.
+ *
+ * Every key the template reads is here. It renders a heading, a button and a link, and
+ * leaving any of them out gives a button and a link with no accessible name — on the one
+ * page whose whole job is telling somebody their appeal did not arrive.
+ */
+const submissionFailedLocals = {
+  en: {
+    title: "Your appeal was not sent",
+    intro:
+      "There was a problem sending your appeal to the tribunal. Your answers have been saved, so you can try again without filling anything in a second time.",
+    tryAgain: "Try again",
+    tryAgainHref: "/appeal/declaration",
+    checkAnswers: "Check your answers before trying again",
+    checkAnswersHref: "/appeal/check-answers"
+  },
+  cy: {
+    title: "Your appeal was not sent",
+    intro:
+      "There was a problem sending your appeal to the tribunal. Your answers have been saved, so you can try again without filling anything in a second time.",
+    tryAgain: "Try again",
+    tryAgainHref: "/appeal/declaration",
+    checkAnswers: "Check your answers before trying again",
+    checkAnswersHref: "/appeal/check-answers"
+  }
+};
+
 const schema = z.object({
-  capacity: z.enum(["self", "onBehalf"], { message: "capacityRequired" }),
+  capacity: z.enum(["appellantSigning", "signingOnBehalf"], { message: "capacityRequired" }),
   signatoryRole: z.enum(["appellant", "representative", "appointee"], { message: "signatoryRoleRequired" }),
   fullName: z.string().trim().min(1, "fullNameRequired").max(MAX_NAME, "fullNameTooLong"),
   signature: z.string().trim().min(1, "signatureRequired").max(MAX_NAME, "signatureTooLong")
@@ -126,7 +156,7 @@ const postHandler = async (req: Request, res: Response) => {
       // log and the investigation starts from "it just says it was not sent".
       console.error(`CCD refused the appeal (status ${error.status}): ${error.message}`);
       // The draft is untouched, so Try again resubmits exactly what they confirmed.
-      return res.status(502).render("_errors/submission-failed", { title: "Your appeal was not sent", tryAgainHref: "/appeal/declaration" });
+      return res.status(502).render("_errors/submission-failed", submissionFailedLocals);
     }
     throw error;
   }

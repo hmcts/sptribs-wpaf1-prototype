@@ -25,7 +25,7 @@ function appealDraft(): AppealDraft {
     serviceStatus: "leftService"
   };
   draft.decision = { scheme: "warPension", decisionLetterDate: { day: "1", month: "2", year: "2026" }, appealAbout: ["awardLevel"] };
-  draft.declaration = { capacity: "self" };
+  draft.declaration = { capacity: "appellantSigning" };
   return draft;
 }
 
@@ -61,7 +61,7 @@ describe("summarise", () => {
 
   it("should join a multi-select answer one option per line", () => {
     const draft = appealDraft();
-    draft.decision.appealAbout = ["awardStartDate", "label"];
+    draft.decision.appealAbout = ["awardStartDate", "awardLabel"];
 
     expect(find(draft, "What you are appealing about")?.value).toBe("The date an award starts\nThe label — the medical name given for a claimed condition");
   });

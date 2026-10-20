@@ -25,7 +25,7 @@ export type Scheme = "warPension" | "afcs";
 export type ServiceStatus = "stillServing" | "leftService";
 
 /** WPAF1 question 4.2 — the grounds, which map onto the PAT Act 1943 categories. */
-export type AppealType = "entitlement" | "awardLevel" | "awardStartDate" | "awardChanges" | "label" | "other";
+export type AppealType = "entitlement" | "awardLevel" | "awardStartDate" | "awardChanges" | "awardLabel" | "other";
 
 /**
  * The only two grounds on which an appointee may sign for the appellant.
@@ -37,7 +37,7 @@ export type AppealType = "entitlement" | "awardLevel" | "awardStartDate" | "awar
 export type SigningGround = "underSixteen" | "infirmity";
 
 /** Whether the appeal is the signatory's own, which chooses the declaration's wording. */
-export type DeclarationCapacity = "self" | "onBehalf";
+export type DeclarationCapacity = "appellantSigning" | "signingOnBehalf";
 
 export type SignatoryRole = "appellant" | "representative" | "appointee";
 

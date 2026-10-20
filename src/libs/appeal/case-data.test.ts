@@ -108,7 +108,7 @@ function fullDraft() {
   draft.support = { needsSupport: "Yes", supportDetails: "A hearing loop, and a seat near the front." };
   draft.uksf = { servedWithUksf: "No" };
   draft.declaration = {
-    capacity: "self",
+    capacity: "appellantSigning",
     signatoryRole: "appellant",
     fullName: "Gareth Price",
     signature: "Gareth Price",

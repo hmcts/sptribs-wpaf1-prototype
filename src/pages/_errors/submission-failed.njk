@@ -1,11 +1,11 @@
 {% extends "_layouts/citizen.njk" %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
-{# CCD would not take the application.
+{# CCD would not take the appeal.
 
-   A proper GOV.UK error page rather than a stack trace, and one that says the
-   answers are safe — because they are: pay.ts clears them only after a case exists,
-   so Try again costs the citizen nothing. #}
+   A proper GOV.UK error page rather than a stack trace, and one that says the answers
+   are safe — because they are: declaration.ts clears the draft only after a case
+   exists, so Try again resubmits exactly what was confirmed and costs nothing. #}
 
 {% block content %}
   <div class="govuk-grid-row">

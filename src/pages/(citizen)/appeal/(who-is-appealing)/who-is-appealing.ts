@@ -16,7 +16,7 @@ const BACK = "/appeal/task-list";
 const NEXT = "/appeal/task-list";
 
 const schema = z.object({
-  capacity: z.enum(["self", "onBehalf"], { message: "capacityRequired" })
+  capacity: z.enum(["appellantSigning", "signingOnBehalf"], { message: "capacityRequired" })
 });
 
 const getHandler = (req: Request, res: Response) => {

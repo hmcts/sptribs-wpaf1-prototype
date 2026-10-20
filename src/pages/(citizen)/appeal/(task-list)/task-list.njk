@@ -38,7 +38,15 @@
         {{ govukButton({ text: checkAnswers, href: "/appeal/check-answers" }) }}
       {% else %}
         <p class="govuk-body">{{ submitNotReady }}</p>
-        {{ govukButton({ text: checkAnswers, href: "/appeal/check-answers", disabled: true }) }}
+        {# `disabled: true` does nothing on a link-button — govuk-frontend only honours it on
+           <button>, so the class and aria-disabled have to be set by hand or this renders as an
+           ordinary working link directly under the sentence saying it is not ready. #}
+        {{ govukButton({
+          text: checkAnswers,
+          href: "/appeal/check-answers",
+          classes: "govuk-button--disabled",
+          attributes: { "aria-disabled": "true" }
+        }) }}
       {% endif %}
     </div>
   </div>

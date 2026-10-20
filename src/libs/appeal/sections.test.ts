@@ -243,7 +243,7 @@ function completeDraft(): AppealDraft {
   draft.reasons = { appealReasons: "The assessment does not reflect how much my knee limits me." };
   draft.support = { needsSupport: "No" };
   draft.uksf = { servedWithUksf: "No" };
-  draft.declaration = { capacity: "self" };
+  draft.declaration = { capacity: "appellantSigning" };
   draft.documentsChecklist = { decisionLetter: true };
   draft.supportingEvidence = [{ evidenceDescription: "A consultant's report" }];
   return draft;

@@ -38,8 +38,8 @@ const LABELS: Record<string, Record<string, string>> = {
     afcs: "Armed Forces Compensation Scheme — injury caused by service on or after 6 April 2005"
   },
   capacity: {
-    self: "I am the appellant",
-    onBehalf: "I am appealing for someone else"
+    appellantSigning: "I am the appellant",
+    signingOnBehalf: "I am appealing for someone else"
   },
   serviceStatus: { stillServing: "Still serving", leftService: "Left service" },
   appealAbout: {
@@ -47,7 +47,7 @@ const LABELS: Record<string, Record<string, string>> = {
     awardLevel: "The level of an award — the percentage assessment, or the rate of allowance or tariff level",
     awardStartDate: "The date an award starts",
     awardChanges: "Changes to the amount or duration of an award",
-    label: "The label — the medical name given for a claimed condition",
+    awardLabel: "The label — the medical name given for a claimed condition",
     other: "Something else"
   },
   signingGround: {

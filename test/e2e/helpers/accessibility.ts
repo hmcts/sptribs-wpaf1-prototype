@@ -12,9 +12,15 @@ import { expect, type Page } from "@playwright/test";
  *
  * Tags are named explicitly rather than left to axe's defaults, so upgrading axe changes
  * what is reported only when this line changes.
+ *
+ * `disableRules` is for a rule axe reports against **govuk-frontend's own** markup or
+ * scripting, where the fix is not this service's to make. Each use has to name the component
+ * and say why at the call site. It is never for a violation in a template in this repo: the
+ * point of the check is that those get fixed, not listed.
  */
-export async function expectNoAccessibilityViolations(page: Page, context: string): Promise<void> {
-  const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
+export async function expectNoAccessibilityViolations(page: Page, context: string, disableRules: string[] = []): Promise<void> {
+  const builder = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]);
+  const results = await (disableRules.length > 0 ? builder.disableRules(disableRules) : builder).analyze();
 
   const summary = results.violations.map(
     (violation) =>

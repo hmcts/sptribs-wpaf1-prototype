@@ -13,7 +13,7 @@ import { dismissCookieBanner, lateDate, startAppeal, submit, veryLateDate, walkT
  * separate things that can disagree.
  *
  * The hub's own specs — completing every section, check-your-answers, the declaration and
- * the CCD submit — belong with the hub pages and are not written yet.
+ * the CCD submit — need a signed-in citizen and live in hub.spec.ts.
  */
 
 test.describe("the compliance gate", () => {

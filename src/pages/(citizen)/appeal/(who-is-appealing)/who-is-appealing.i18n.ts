@@ -12,12 +12,12 @@ export const en = {
   capacityLabel: "Are you appealing for yourself or for someone else?",
   capacityOptions: [
     {
-      value: "self",
+      value: "appellantSigning",
       text: "I am the appellant",
       hint: "The decision you are appealing is about you."
     },
     {
-      value: "onBehalf",
+      value: "signingOnBehalf",
       text: "I am appealing for someone else",
       hint: "For example, you are the appellant's representative or appointee, or a relative helping them."
     }

@@ -26,7 +26,7 @@ const schema = z.object({
     .union([z.string(), z.array(z.string())])
     .optional()
     .transform(toArray)
-    .pipe(z.array(z.enum(["entitlement", "awardLevel", "awardStartDate", "awardChanges", "label", "other"])).min(1, "appealAboutRequired")),
+    .pipe(z.array(z.enum(["entitlement", "awardLevel", "awardStartDate", "awardChanges", "awardLabel", "other"])).min(1, "appealAboutRequired")),
   appealAboutOther: z.string().trim().max(2000, "appealAboutOtherTooLong").optional().default("")
 });
 

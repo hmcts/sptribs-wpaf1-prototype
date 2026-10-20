@@ -15,9 +15,9 @@ export const en = {
   lede: "Read the declaration and choose the statement that is true of you. Then sign the appeal.",
   capacityLabel: "Which statement applies to you?",
   capacityOptions: [
-    { value: "self", text: "I am the appellant, and I believe that the facts stated in this appeal are true" },
+    { value: "appellantSigning", text: "I am the appellant, and I believe that the facts stated in this appeal are true" },
     {
-      value: "onBehalf",
+      value: "signingOnBehalf",
       text: "The appellant believes that the facts stated in this appeal are true, and I am authorised by the appellant to sign this appeal"
     }
   ],
